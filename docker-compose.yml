@@ -1,0 +1,11 @@
+services:
+  api-solid:
+    image: bitnami/postgresql
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRESQL_USERNAME=rgsm
+      - POSTGRESQL_PASSWORD=rgsm
+      - POSTGRESQL_DATABASE=solid
+      - POSTGRESQL_REPLICATION_MODE=master
+      - POSTGRESQL_REPLICATION_USE_PASSFILE=no
