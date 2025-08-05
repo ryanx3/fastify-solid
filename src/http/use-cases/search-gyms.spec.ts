@@ -14,16 +14,16 @@ describe("Search Gyms Use Case", () => {
   it("should be able to search for gyms", async () => {
     await gymsRepository.create({
       title: "JavaScript Gym",
-      description: "Gym by JavaScript-PR",
-      phone: "41984865182",
+      description: null,
+      phone: null,
       latitude: -27.2092052,
       longitude: -49.6401091,
     });
 
     await gymsRepository.create({
       title: "TypeScript Gym",
-      description: "Gym by TypeScript-PR",
-      phone: "41984865182",
+      description: null,
+      phone: null,
       latitude: -27.2092052,
       longitude: -49.6401091,
     });
