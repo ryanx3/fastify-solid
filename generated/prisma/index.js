@@ -150,7 +150,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\rxdev\\OneDrive\\Documents\\Projetos\\fastify-solid\\generated\\prisma",
+      "value": "C:\\RGSM\\fastify-solid\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -164,7 +164,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\rxdev\\OneDrive\\Documents\\Projetos\\fastify-solid\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\RGSM\\fastify-solid\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -178,12 +178,11 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": null
+        "value": "postgresql://rgsm:rgsm@localhost:5432/fastifysolid?schema=public"
       }
     }
   },
