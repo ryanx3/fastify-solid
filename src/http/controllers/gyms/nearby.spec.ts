@@ -1,9 +1,9 @@
-import request from "supertest";
+import { expect, describe, it, beforeAll, afterAll } from "vitest";
 import { app } from "@/app";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import request from "supertest";
 import { createAndAuthenticateUser } from "@/utils/test/create-and-authenticate-user";
 
-describe("Search Gyms (e2e)", () => {
+describe("Fetch Nearby Gyms (e2e)", () => {
   beforeAll(async () => {
     await app.ready();
   });
@@ -12,7 +12,7 @@ describe("Search Gyms (e2e)", () => {
     await app.close();
   });
 
-  it("should be able to search gyms by title", async () => {
+  it("should be able to fetch nearby gyms", async () => {
     const { token } = await createAndAuthenticateUser(app);
 
     await request(app.server)
@@ -20,10 +20,10 @@ describe("Search Gyms (e2e)", () => {
       .set("Authorization", `Bearer ${token}`)
       .send({
         title: "Gym 01",
-        description: "Test description.",
-        phone: "00000000",
-        latitude: -27.2092052,
-        longitude: -49.6401091,
+        description: "Some description.",
+        phone: "000000000",
+        latitude: -38.5246646,
+        longitude: -8.8827046,
       });
 
     await request(app.server)
@@ -31,16 +31,17 @@ describe("Search Gyms (e2e)", () => {
       .set("Authorization", `Bearer ${token}`)
       .send({
         title: "Gym 02",
-        description: "Test2 description.",
-        phone: "00000000",
+        description: "Test description.",
+        phone: "000000000",
         latitude: -27.2092052,
         longitude: -49.6401091,
       });
 
     const response = await request(app.server)
-      .get("/gyms/search")
+      .get("/gyms/nearby")
       .query({
-        query: "02",
+        latitude: -27.2092052,
+        longitude: -49.6401091,
       })
       .set("Authorization", `Bearer ${token}`)
       .send();
