@@ -23,10 +23,11 @@ export class PrismaGymsRepository implements GymsRepository {
       where: {
         title: {
           contains: query,
+          mode: "insensitive",
         },
       },
       take: 20,
-      skip: page - 1 * 20,
+      skip: (page - 1) * 20,
     });
     return gyms;
   }
