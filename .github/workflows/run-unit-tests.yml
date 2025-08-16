@@ -1,0 +1,21 @@
+name: Run Unit Tests            # Nome do workflow, aparece na aba "Actions" do GitHub
+
+on: [push]                      # Evento que dispara o workflow: aqui, toda vez que alguém der "git push"
+
+jobs:                           # Bloco de jobs (um workflow pode ter vários)
+  run-unit-tests:               # ID interno do job (pode ter qualquer nome, mas sem espaços)
+    name: Run Unit Tests        # Nome legível do job, aparece no log
+    runs-on: ubuntu-latest      # Define o SO/ambiente que o GitHub vai criar (máquina virtual Ubuntu)
+
+    steps:                      # Lista de passos a executar dentro do job
+      - uses: actions/checkout@v3   # Primeira ação: baixa o código do repositório para dentro da VM
+
+      - uses: actions/setup-node@v3 # Segunda ação: instala o Node.js na VM
+        with:                       # Configurações adicionais dessa action
+          node-version: 22          # Versão do Node que será instalada (a mesma do projeto local)
+          cache: 'npm'              # Habilita cache das dependências npm (deixa execuções futuras mais rápidas)
+
+      - run: npm ci                 # Executa o comando "npm ci" → instala dependências exatamente como no package-lock.json
+                                    # (sem atualizar versões, sem interações, mais confiável para CI do que "npm install")
+
+      - run: npm run test           # Executa os testes unitários do projeto (comando configurado no package.json)
